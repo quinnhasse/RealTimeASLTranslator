@@ -1,8 +1,9 @@
-import pandas as pd
+import os
+import mediapipe as mp
+import cv2
 
-file_path = "notebook/data"
-def load_labels(file_path):
-    
-    # Load labels from a CSV file
-    data = pd.read_csv(file_path)
-    return data
+data_path = '/Users/quinnhasse/RealTimeASLTRasnlator/src/notebook/data/asl_alphabet_test'
+
+for dir_ in os.listdir(data_path):
+    for img_path in os.listdir(os.path.join(data_path,dir_)):
+        img = cv2.imread(os.path.join(data_path,dir_,img_path))

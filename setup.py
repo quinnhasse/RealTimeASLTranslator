@@ -17,7 +17,7 @@ def get_requirements(file_path:str)->List[str]:
     return requirements
 
 setup(
-name='mlproject1',
+name='RealTimeASLTranslator',
 version='0.0.1',
 author='Quinn',
 author_email='quinn.hasse@gmail.com',

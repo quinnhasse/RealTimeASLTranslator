@@ -1,17 +1,8 @@
-tensorflow
-torch
-torchvision
-scikit-learn
-opencv-python
-mediapipe
-numpy
-pillow
-onnxruntime
 matplotlib
-seaborn
-flask
-gradio
+numpy
+opencv-python
+tensorflow
 pandas
-pytest
-tqdm
--e .
+seaborn
+
+#-e .
