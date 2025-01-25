@@ -1,0 +1,17 @@
+tensorflow
+torch
+torchvision
+scikit-learn
+opencv-python
+mediapipe
+numpy
+pillow
+onnxruntime
+matplotlib
+seaborn
+flask
+gradio
+pandas
+pytest
+tqdm
+#-e .
