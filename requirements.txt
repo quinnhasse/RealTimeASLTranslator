@@ -14,4 +14,4 @@ gradio
 pandas
 pytest
 tqdm
-#-e .
+-e .
