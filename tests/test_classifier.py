@@ -126,6 +126,31 @@ class TestEvalHarness:
         with pytest.raises(FileNotFoundError):
             load_data(str(tmp_path / "nonexistent.pickle"))
 
+    def test_load_data_filters_two_hand_rows(self, tmp_path):
+        import pickle
+
+        from eval import load_data
+
+        rng = np.random.default_rng(0)
+        rows = [rng.random(FEATURE_DIM).tolist() for _ in range(10)]
+        labels = ["A"] * 10
+        # Inject a few two-hand (84-feature) rows that must be filtered out.
+        rows.insert(3, rng.random(FEATURE_DIM * 2).tolist())
+        labels.insert(3, "B")
+        rows.append(rng.random(FEATURE_DIM * 2).tolist())
+        labels.append("C")
+
+        data_path = tmp_path / "mixed.pickle"
+        with open(data_path, "wb") as f:
+            pickle.dump({"data": rows, "labels": labels}, f)
+
+        data, loaded_labels = load_data(str(data_path))
+        assert data.shape == (10, FEATURE_DIM)
+        assert loaded_labels.shape == (10,)
+        assert "B" not in loaded_labels
+        assert "C" not in loaded_labels
+        assert set(loaded_labels) == {"A"}
+
 
 class TestBenchmark:
     """Tests for benchmark latency measurement."""

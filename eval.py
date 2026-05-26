@@ -60,8 +60,11 @@ def load_data(data_path: str):
         raise FileNotFoundError(f"Data file not found: {data_path}")
     with open(data_path, "rb") as f:
         data_dict = pickle.load(f)
-    data = np.asarray(data_dict["data"])
-    labels = np.asarray(data_dict["labels"])
+    raw_data = data_dict["data"]
+    raw_labels = data_dict["labels"]
+    keep = [i for i, x in enumerate(raw_data) if hasattr(x, "__len__") and len(x) == 42]
+    data = np.asarray([raw_data[i] for i in keep], dtype=np.float64)
+    labels = np.asarray([raw_labels[i] for i in keep])
     return data, labels
 
 
